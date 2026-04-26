@@ -1,193 +1,72 @@
-# Gui_WebsiteFull
+## Overview
+This project appears to be a development environment for building graphical user interfaces (GUIs) using a combination of C/C++ and custom scripting languages. The primary purpose seems to be creating interactive GUI applications that can run on multiple platforms, including Linux, Windows, and the web.
 
+## Features
+- **Cross-platform support**: Applications can be built for different operating systems (Linux, Windows).
+- **WebAssembly support**: The project includes a Makefile for building the application as WebAssembly.
+- **Custom scripting languages**: The project uses custom languages such as `.ll` for event handling and `.alxml` for GUI layout definition.
 
-## Project Overview
-
-This project implements specialized functionality related to websitefull.
-
-## Core Components
-
-### Main Functionality
-- Implements core algorithms for websitefull
-- Efficient data structures
-- Optimized performance
-- Clean code organization
-
-### Technical Features
-- C/C++ implementation
-- Dynamic memory management
-- Platform-independent design
-- Real-time capable
-
-### Architecture
-- Module separation
-- Clear interface design
-- Proper abstraction layers
-- Extensible design
-
-## Use Cases
-- Production systems
-- Educational purposes
-- Research applications
-- Performance-critical operations
-
-## Performance Characteristics
-- Optimized algorithms
-- Efficient memory usage
-- Scalable architecture
-- Minimal overhead
-
-## Implementation Quality
-- Well-organized code
-- Meaningful naming
-- Proper error handling
-- Memory management
-
-## Build and Deployment
-- Standard C/C++ compilation
-- Makefile-based building
-- Cross-platform support
-- Easy integration
-
-
-## Building the Project
-
+## Project Structure
 ### Prerequisites
-- C/C++ Compiler (GCC, Clang, or MSVC)
+- C/C++ Compiler and Debugger (GCC, Clang)
 - Make utility
 - Standard development tools
+- Libraries needed:
+  - Linux: X11 (for graphical interface), ALSA (for audio) if required.
+  - Windows: WINAPI
+  - WebAssembly: Emscripten
 
-### Build Steps
+### Files
+- `build/`: Contains the executable files produced by `Main.c`.
+- `bin/`: Contains shared object or dynamic link libraries (`*.so` or `*.dll`) generated from source files in `libs`.
+- `libs/`: Contains source files for generating `*.so` or `*.dll`.
+- `lib/`: Directory for custom library files used in the project.
+- `code/`: Contains scripts in custom languages such as `.ll`, `.alxml`, and potentially others like `.rex`, `.omml`.
+  - `Main.ll`: Script handling events like button clicks.
+  - `Main.alxml`: Script defining the layout of the GUI.
+- `data/`: Directory for data files, though no specific data files are listed.
+- `assets/`: Directory for images and sound files used in the application.
+- `src/`: Contains the main source code:
+  - `Main.c`: Entry point of the application.
+  - Other `.h` files: Standalone header-based C-files without corresponding `.c` implementation files.
+- `Makefile.linux`: Linux build configuration.
+- `Makefile.windows`: Windows build configuration.
+- `Makefile.wine`: Build configuration for cross-compiling on Linux to run on Windows using Wine.
+- `Makefile.web`: Emscripten build configuration for WebAssembly.
 
-1. Navigate to project directory:
+## Build & Run
+### Build Process and Execution
+
+To build the project, navigate to the project directory and use the appropriate makefile:
+
 ```bash
-cd Gui_WebsiteFull
-```
-
-2. Build the project:
-```bash
+cd <Project>
 make -f Makefile.(os) all
 ```
 
-3. For clean rebuild:
+Replace `(os)` with either `linux`, `windows`, or `wine` depending on your target platform.
+
+For a clean rebuild:
 ```bash
 make -f Makefile.(os) clean
 make -f Makefile.(os) all
 ```
 
-4. If there are ./bin and ./libs directories, build libs with:
+If you need to build the libraries separately (assuming there are `*.c` files in the `libs/` directory):
 ```bash
 make -f Makefile.(os) cleanlib
 make -f Makefile.(os) lib
 ```
 
 ### Build Options
-```bash
-make -f Makefile.(os) all         # build output
-make -f Makefile.(os) do        # build + exe output
-make -f Makefile.(os) clean   # Remove build artifacts
-```
 
-## Running the Project
+- `make -f Makefile.(os) all`: Builds the output executable.
+- `make -f Makefile.(os) do`: Builds and executes the application.
+- `make -f Makefile.(os) clean`: Removes build artifacts.
 
-Execute the compiled binary:
-
-```bash
-./build/Main(.exe)
-```
-
-Or using make:
+To execute the built application:
 ```bash
 make -f Makefile.(os) exe
 ```
 
-## Project Organization
-
-```
-Gui_WebsiteFull/
-├── src/
-│   ├── Main.c          # Entry point
-│   └── *.c             # Implementation files
-├── Makefile            # Build configuration
-└── README.md           # This file
-```
-
-## Technical Details
-
-### Language: C/C++
-- Performance-oriented
-- Direct hardware access where needed
-- Memory efficient
-- Widely portable
-
-### Key Technologies
-- Standard C library
-- System-specific libraries as needed
-- Algorithm optimization
-- Efficient data structures
-
-### Code Quality
-- Clean, readable implementation
-- Proper error handling
-- Resource management
-- Well-documented algorithms
-
-## Development Notes
-
-### Architecture Decisions
-- Modular design for reusability
-- Efficient algorithms for performance
-- Clear separation of concerns
-- Extensible structure
-
-### Performance Optimizations
-- Algorithm efficiency
-- Memory layout optimization
-- Cache-conscious programming
-- Minimal overhead
-
-### Portability
-- Cross-platform compatible
-- Platform-specific optimizations where possible
-- Standard library usage
-- No external dependencies (where feasible)
-
-## Troubleshooting
-
-### Build Issues
-- Ensure compiler is installed
-- Check file paths and permissions
-- Verify Make installation
-- Review compiler error messages
-
-### Runtime Issues
-- Check input data validity
-- Verify file accessibility
-- Ensure sufficient memory
-- Review output format
-
-### Performance Issues
-- Check compiler optimization flags
-- Profile hot code paths
-- Review algorithm complexity
-- Consider input size
-
-## Future Improvements
-
-Potential enhancements:
-- Additional optimization opportunities
-- Extended functionality
-- Platform-specific optimizations
-- Performance profiling
-
-## References
-
-For technical background:
-- Algorithm textbooks
-- Computer science references
-- Language documentation
-- Online educational resources
-
----
-
-*Project implementing practical algorithms and data structures in C/C++*
+This setup allows developers to create cross-platform applications using C/C++, with custom scripting for GUI layout and event handling, and supports building both locally and for web deployment.
